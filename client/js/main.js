@@ -1,56 +1,51 @@
-//client/js/main.js
+document.addEventListener("DOMContentLoaded",()=>{
 
-const loginBtn = document.getElementById("loginBtn");
+    document.getElementById("loginBtn").addEventListener("click",login);
 
-loginBtn.addEventListener("click", async () => {
+});
 
-    console.log("BOTTONE CLICCATO");
+async function login(){
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email=document.getElementById("email").value.trim();
+    const password=document.getElementById("password").value.trim();
 
-    console.log(email, password);
+    try{
 
-    try {
+        const response=await fetch("http://localhost:3001/api/login",{
 
-        const response = await fetch("/api/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
             },
-            body: JSON.stringify({
+
+            body:JSON.stringify({
                 email,
                 password
             })
+
         });
 
-        console.log("RISPOSTA SERVER", response.status);
-        
-        const data = await response.json();
+        const data=await response.json();
 
-        if (data.success) {
+        if(data.success){
 
-            alert("LOGIN OK");
+            localStorage.setItem("user",JSON.stringify(data.user));
 
-            localStorage.setItem("user", JSON.stringify(data.user));
+            window.location.href="dashboard.html";
 
-            alert(localStorage.getItem("user"));
+        }else{
 
-            window.location.href = "dashboard.html";
-
-        } else {
-
-            document.getElementById("errore").innerText = data.message;
+            document.getElementById("errore").innerHTML=data.message;
 
         }
 
-    } catch (err) {
+    }catch(err){
 
-        document.getElementById("errore").innerText =
-            "Errore di connessione al server";
+        console.log(err);
 
-        console.error(err);
+        document.getElementById("errore").innerHTML="Server non raggiungibile";
 
     }
 
-});
+}

@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!currentUser) return;
     
     // Verifica accesso
-    if (!['aftersales', 'admin'].includes(currentUser.ruolo)) {
+    if (!['aftersales', 'admin'].includes(currentUser.role)) {
         alert('Accesso non autorizzato');
         window.location.href = 'tickets.html';
         return;

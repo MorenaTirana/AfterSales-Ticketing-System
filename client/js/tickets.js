@@ -22,7 +22,7 @@ function setupUI() {
     document.getElementById('userInfo').innerHTML = `
         <span class="user-badge">
             <i class="fas fa-user"></i> ${currentUser.nome} ${currentUser.cognome}
-            <span class="role-badge role-${currentUser.ruolo}">${currentUser.ruolo}</span>
+            <span class="role-badge role-${currentUser.role}">${currentUser.ruolo}</span>
         </span>
     `;
     

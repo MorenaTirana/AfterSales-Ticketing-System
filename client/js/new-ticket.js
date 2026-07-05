@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function setupUI() {
     // Dashboard link per staff
-    if (['aftersales', 'admin'].includes(currentUser.ruolo)) {
+    if (['aftersales', 'admin'].includes(currentUser.role)) {
         document.getElementById('dashboardLink').innerHTML = 
             '<a href="dashboard.html"><i class="fas fa-chart-bar"></i> Dashboard</a>';
     }
