@@ -4,12 +4,16 @@ const loginBtn = document.getElementById("loginBtn");
 
 loginBtn.addEventListener("click", async () => {
 
+    console.log("BOTTONE CLICCATO");
+
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
+    console.log(email, password);
+
     try {
 
-        const response = await fetch("/api/login", {
+        const response = await fetch("/api/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -20,6 +24,8 @@ loginBtn.addEventListener("click", async () => {
             })
         });
 
+        console.log("RISPOSTA SERVER", response.status);
+        
         const data = await response.json();
 
         if (data.success) {

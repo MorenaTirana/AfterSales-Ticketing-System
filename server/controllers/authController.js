@@ -1,41 +1,52 @@
-//server/controllers/authController.js
+const db = require("../db");
 
-const db = require('../db');
+exports.login = async (req, res) => {
 
-exports.login = (req, res) => {
+    try {
 
-    const { email, password } = req.body;
+        const { email, password } = req.body;
 
-    const sql = `
-        SELECT id, nome, cognome, email, role
-        FROM users
-        WHERE email = ?
-        AND password_hash = ?
-        LIMIT 1
-    `;
+        console.log("LOGIN:", email);
 
-    db.query(sql, [email, password], (err, results) => {
+        const sql = `
+            SELECT id,
+                   nome,
+                   cognome,
+                   email,
+                   role
+            FROM users
+            WHERE email = ?
+            AND password_hash = ?
+            LIMIT 1
+        `;
 
-        if (err) {
-            console.error(err);
-            return res.status(500).json({
-                success: false,
-                message: "Errore del server"
-            });
-        }
+        const [rows] = await db.query(sql, [email, password]);
 
-        if (results.length === 0) {
+        console.log(rows);
+
+        if (rows.length === 0) {
+
             return res.status(401).json({
                 success: false,
-                message: "Email o password non corretti"
+                message: "Email o password errati"
             });
+
         }
 
-        res.json({
+        return res.json({
             success: true,
-            user: results[0]
+            user: rows[0]
         });
 
-    });
+    } catch (err) {
+
+        console.error(err);
+
+        return res.status(500).json({
+            success: false,
+            message: err.message
+        });
+
+    }
 
 };

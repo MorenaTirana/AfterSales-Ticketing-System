@@ -3,6 +3,9 @@
 const mysql = require("mysql2/promise");
 require("dotenv").config();
 
+console.log("ENV letto:", process.env.DB_NAME);
+console.log("Directory:", process.cwd());
+
 const pool = mysql.createPool({
 
     host: process.env.DB_HOST || "localhost",
@@ -11,7 +14,7 @@ const pool = mysql.createPool({
 
     password: process.env.DB_PASSWORD || "",
 
-    database: process.env.DB_NAME || "sessa_after_sales",
+    database: process.env.DB_NAME || "sessa_aftersales",
 
     port: process.env.DB_PORT || 3306,
 

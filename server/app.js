@@ -21,6 +21,13 @@ app.use(express.urlencoded({
     extended: true
 }));
 
+
+// DEBUG
+app.use((req, res, next) => {
+    console.log(req.method, req.url);
+    next();
+});
+
 // Cartella upload
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -35,10 +42,10 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/customers", require("./routes/customerRoutes"));
 app.use("/api/tickets", require("./routes/ticketRoutes"));
-app.use("/api/dashboard", require("./routes/dashboardRoutes"));
-app.use("/api/assignments", require("./routes/assignmentRoutes"));
-app.use("/api/comments", require("./routes/commentRoutes"));
-app.use("/api/attachments", require("./routes/attachmentRoutes"));
+//app.use("/api/dashboard", require("./routes/dashboardRoutes"));
+//app.use("/api/assignments", require("./routes/assignmentRoutes"));
+// app.use("/api/comments", require("./routes/commentRoutes"));
+//app.use("/api/attachments", require("./routes/attachmentRoutes"));
 
 // =========================
 // Home
