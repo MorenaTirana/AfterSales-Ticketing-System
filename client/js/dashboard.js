@@ -1,4 +1,5 @@
 // client/js/dashboard.js
+
 let currentUser = null;
 
 document.addEventListener('DOMContentLoaded', async () => {

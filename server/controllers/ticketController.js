@@ -1,5 +1,6 @@
 // server/controllers/ticketController.js
-const db = require('../config/db');
+
+const db = require('../db');
 
 // Genera codice ticket univoco
 const generateTicketCode = async (tipo) => {

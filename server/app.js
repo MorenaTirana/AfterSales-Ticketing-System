@@ -1,76 +1,78 @@
-// server/app.js
-
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-
-// Carica il file .env se presente
 require("dotenv").config();
 
-const db = require("./db");
-
-const userRoutes = require("./routes/userRoutes");
-const authRoutes = require("./routes/authRoutes");
-const customerRoutes = require("./routes/customerRoutes");
-const ticketRoutes = require("./routes/ticketRoutes");
-
 const app = express();
-
-// Porta del server
 const PORT = process.env.PORT || 3001;
 
-// ===================================
+// Database
+require("./db");
+
+// =========================
 // Middleware
-// ===================================
+// =========================
 
 app.use(cors());
+
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// ===================================
+app.use(express.urlencoded({
+    extended: true
+}));
+
+// Cartella upload
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Frontend
-// ===================================
-
 app.use(express.static(path.join(__dirname, "../client")));
 
-// ===================================
-// API
-// ===================================
+// =========================
+// Routes
+// =========================
 
-app.use("/api", authRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/customers", customerRoutes);
-app.use("/api/tickets", ticketRoutes);
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/customers", require("./routes/customerRoutes"));
+app.use("/api/tickets", require("./routes/ticketRoutes"));
+app.use("/api/dashboard", require("./routes/dashboardRoutes"));
+app.use("/api/assignments", require("./routes/assignmentRoutes"));
+app.use("/api/comments", require("./routes/commentRoutes"));
+app.use("/api/attachments", require("./routes/attachmentRoutes"));
 
-// ===================================
+// =========================
 // Home
-// ===================================
+// =========================
 
 app.get("/", (req, res) => {
-    res.redirect("/login.html");
+    res.sendFile(path.join(__dirname, "../client/index.html"));
 });
 
-// ===================================
-// Gestione Errori
-// ===================================
+// =========================
+// 404
+// =========================
 
-app.use((err, req, res, next) => {
-    console.error(err);
+app.use((req, res) => {
 
-    res.status(500).json({
+    res.status(404).json({
+
         success: false,
-        message: "Errore interno del server."
+        message: "Endpoint non trovato"
+
     });
+
 });
 
-// ===================================
-// Avvio Server
-// ===================================
+// =========================
+// Server
+// =========================
 
 app.listen(PORT, () => {
-    console.log("SESSA After Sales Management System");
-    console.log(`Server avviato su: http://localhost:${PORT}`);
-    console.log(`Ambiente: ${process.env.NODE_ENV || "development"}`);
-});
 
-module.exports = app;
+    console.log("====================================");
+    console.log("SESSA After Sales Management System");
+    console.log("Server avviato");
+    console.log("Porta:", PORT);
+    console.log("====================================");
+
+});

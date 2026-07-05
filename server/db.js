@@ -1,23 +1,53 @@
-//server/db.js
-const mysql = require("mysql2");
+// server/db.js
+
+const mysql = require("mysql2/promise");
 require("dotenv").config();
 
-// Connessione al database
-const connection = mysql.createConnection({
+const pool = mysql.createPool({
+
     host: process.env.DB_HOST || "localhost",
+
     user: process.env.DB_USER || "root",
+
     password: process.env.DB_PASSWORD || "",
-    database: process.env.DB_NAME || "sessa_aftersales"
+
+    database: process.env.DB_NAME || "sessa_after_sales",
+
+    port: process.env.DB_PORT || 3306,
+
+    waitForConnections: true,
+
+    connectionLimit: 10,
+
+    queueLimit: 0,
+
+    multipleStatements: false
+
 });
 
-// Connessione
-connection.connect((err) => {
-    if (err) {
-        console.error("❌ Errore di connessione al database:", err.message);
-        return;
+// Test connessione
+(async () => {
+
+    try {
+
+        const connection = await pool.getConnection();
+
+        console.log("==================================");
+        console.log("✅ MySQL connesso correttamente");
+        console.log("Database:", process.env.DB_NAME || "sessa_after_sales");
+        console.log("==================================");
+
+        connection.release();
+
+    } catch (err) {
+
+        console.error("==================================");
+        console.error("❌ Errore connessione MySQL");
+        console.error(err.message);
+        console.error("==================================");
+
     }
 
-    console.log("✅ Connesso al database MySQL");
-});
+})();
 
-module.exports = connection;
+module.exports = pool;

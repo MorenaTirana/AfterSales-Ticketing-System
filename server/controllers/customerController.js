@@ -1,3 +1,5 @@
+//server/controllers/customerController.js
+
 const db = require("../db");
 
 // Tutti i clienti

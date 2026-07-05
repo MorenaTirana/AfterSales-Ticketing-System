@@ -1,3 +1,5 @@
+//client/js/main.js
+
 const loginBtn = document.getElementById("loginBtn");
 
 loginBtn.addEventListener("click", async () => {

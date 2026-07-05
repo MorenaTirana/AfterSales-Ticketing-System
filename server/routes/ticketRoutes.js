@@ -1,20 +1,33 @@
 //server/routes/ticketRoutes.js
-const express=require("express");
 
-const router=express.Router();
+const express = require("express");
 
-const controller=require("../controllers/ticketController");
+const router = express.Router();
 
+const controller = require("../controllers/ticketController");
 
-router.get("/",controller.getTickets);
+// Lista ticket
+router.get("/", controller.getTickets);
 
-router.get("/:id",controller.getTicket);
+// Barche
+router.get("/boats", controller.getUserBoats);
 
-router.post("/",controller.createTicket);
+// Storico
+router.get("/:id/history", controller.getTicketHistory);
 
-router.put("/:id",controller.updateTicket);
+// Dettaglio ticket
+router.get("/:id", controller.getTicketById);
 
-router.delete("/:id",controller.deleteTicket);
+// Creazione
+router.post("/", controller.createTicket);
 
+// Aggiornamento
+router.put("/:id", controller.updateTicket);
 
-module.exports=router;
+// Cambio stato
+router.patch("/:id/status", controller.updateTicketStatus);
+
+// Eliminazione
+router.delete("/:id", controller.deleteTicket);
+
+module.exports = router;

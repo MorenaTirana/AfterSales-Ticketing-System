@@ -1,45 +1,61 @@
+//README.md
+
 # 🚤 SESSA After Sales Management System
 
-Sistema di gestione dell'assistenza post-vendita sviluppato come progetto universitario, ispirato ad un caso reale del settore nautico.
+Sistema di gestione dell'assistenza post-vendita sviluppato come progetto universitario per il corso di **Tecnologie Informatiche per il Web**.
 
-Il progetto implementa un sistema di ticketing per la gestione delle richieste di assistenza in garanzia (Warranty Request - WIR) e delle richieste di ricambi (Spare Parts Request - SPR), con gestione di utenti, ruoli e workflow operativo.
-
----
-
-# Obiettivi del Progetto
-
-L'applicazione permette di:
-
-- gestire richieste di assistenza post-vendita;
-- aprire e monitorare ticket;
-- distinguere ticket di garanzia e ricambi;
-- gestire utenti e ruoli;
-- monitorare lo stato di avanzamento dei ticket;
-- visualizzare una dashboard riepilogativa.
+Il progetto prende ispirazione da un caso reale del settore nautico e implementa una piattaforma di Ticketing / Helpdesk dedicata alla gestione dell'assistenza post-vendita.
 
 ---
 
-# Tipologie di Ticket
+# 📖 Descrizione
+
+L'applicazione consente di gestire:
+
+- Warranty Request (WIR)
+- Spare Parts Request (SPR)
+- Clienti
+- Dealer
+- Imbarcazioni
+- Ticket
+- Assegnazione tecnici
+- Storico stati
+- Documenti
+- Dashboard statistiche
+
+Il sistema è sviluppato utilizzando un'architettura Client/Server con database MySQL.
+
+---
+
+# 👥 Ruoli del sistema
+
+| Ruolo | Funzioni |
+|--------|----------|
+| Cliente / Dealer | Apertura ticket, consultazione ticket, commenti |
+| After Sales | Gestione ticket, assegnazione tecnici, modifica stati |
+| Tecnico | Visualizzazione ticket assegnati, inserimento note |
+| Amministratore | Gestione completa del sistema |
+
+---
+
+# 📌 Funzionalità implementate
+
+## Gestione Ticket
+
+- Creazione ticket
+- Modifica ticket
+- Chiusura ticket
+- Visualizzazione dettaglio
+- Storico stati
 
 ## Warranty Request (WIR)
 
-Richiesta di intervento in garanzia.
-
-Informazioni gestite:
-
 - Parte danneggiata
-- Tipologia del danno
 - Causa
 - Responsabilità
-- Soluzione proposta
-
----
+- Soluzione
 
 ## Spare Parts Request (SPR)
-
-Richiesta di ricambi.
-
-Informazioni gestite:
 
 - Codice articolo
 - Descrizione
@@ -47,67 +63,62 @@ Informazioni gestite:
 - Costo
 - Tempi di consegna
 
----
+## Gestione Anagrafiche
 
-# Ruoli del Sistema
-
-| Ruolo | Permessi principali |
-|--------|---------------------|
-| Cliente / Dealer | Apertura e consultazione ticket |
-| After Sales | Gestione ticket e aggiornamento stati |
-| Tecnico | Consultazione ticket assegnati e inserimento note |
-| Amministratore | Gestione completa del sistema |
-
----
-
-# Funzionalità
-
-## Gestione Ticket
-
-- Creazione ticket
-- Visualizzazione ticket
-- Modifica ticket
-- Chiusura ticket
-
-## Gestione Utenti
-
-- Login
-- Autenticazione
-- Gestione ruoli
+- Clienti
+- Dealer
+- Imbarcazioni
 
 ## Dashboard
 
-- Stato generale dei ticket
-- Visualizzazione riepilogativa
+- Ticket aperti
+- Ticket chiusi
+- Ticket in lavorazione
 - Statistiche principali
 
 ---
 
-# Tecnologie Utilizzate
+# 🛠 Tecnologie utilizzate
 
 | Componente | Tecnologia |
 |------------|------------|
-| Frontend | HTML5, CSS3, JavaScript |
-| Backend | Node.js + Express.js |
+| Frontend | HTML5 |
+| Stile | CSS3 |
+| Client | JavaScript |
+| Backend | Node.js |
+| Framework | Express.js |
 | Database | MySQL |
 | API | REST |
 
 ---
 
-# Struttura del Progetto
+# 📂 Struttura del progetto
 
 ```text
-AfterSales-Ticketing-System
+SESSA MARINE SYSTEM
 │
 ├── client/
 │   ├── css/
+│   ├── images/
 │   ├── js/
-│   └── *.html
+│   ├── login.html
+│   ├── dashboard.html
+│   ├── tickets.html
+│   ├── ticket-detail.html
+│   ├── new-ticket.html
+│   ├── clienti.html
+│   ├── dealer.html
+│   ├── barche.html
+│   ├── wir.html
+│   ├── spr.html
+│   ├── statistiche.html
+│   ├── documenti.html
+│   ├── trasferte.html
+│   └── impostazioni.html
 │
 ├── server/
 │   ├── controllers/
 │   ├── routes/
-│   ├── middleware/
 │   ├── app.js
 │   └── db.js
 │
@@ -115,39 +126,52 @@ AfterSales-Ticketing-System
 │   ├── schema.sql
 │   └── seed.sql
 │
+├── docs/
+│
 ├── package.json
 ├── package-lock.json
 ├── .gitignore
+├── .env.example
 └── README.md
 ```
 
 ---
 
-# Installazione
+# ⚙ Installazione
 
-## Prerequisiti
+## Requisiti
 
 - Node.js 18+
 - MySQL 8+
 
-## Installazione
+---
+
+## Installazione dipendenze
 
 ```bash
 npm install
 ```
 
+---
+
 ## Configurazione Database
 
-Creare un database MySQL ed eseguire:
+Creare un database MySQL.
+
+Successivamente eseguire:
 
 ```text
 database/schema.sql
 database/seed.sql
 ```
 
-## Configurazione del file .env
+---
 
-```env
+## Configurazione ambiente
+
+Creare un file `.env` partendo da `.env.example`
+
+```
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=password
@@ -157,7 +181,7 @@ PORT=3001
 
 ---
 
-# Avvio del Progetto
+# ▶ Avvio del progetto
 
 ```bash
 npm start
@@ -169,17 +193,17 @@ oppure
 node server/app.js
 ```
 
-Il server sarà disponibile su:
+Server:
 
-```text
+```
 http://localhost:3001
 ```
 
 ---
 
-# Database
+# 🗄 Database
 
-Il database comprende le principali entità del sistema:
+Il database comprende:
 
 - Users
 - Dealers
@@ -194,13 +218,81 @@ Il database comprende le principali entità del sistema:
 - Documents
 - Transfers
 
-Lo schema completo è disponibile nel file:
+Schema disponibile in:
 
-```text
+```
 database/schema.sql
 ```
+
 ---
-# Autore
+
+# 🔑 Credenziali di test
+
+## Admin
+
+```
+email: admin@sessamarine.com
+password: admin123
+```
+
+## After Sales
+
+```
+email: francesco@sessamarine.com
+password: password
+```
+
+## Tecnico
+
+```
+email: maria@sessamarine.com
+password: password
+```
+
+## Cliente
+
+```
+email: mario@email.com
+password: password
+```
+
+---
+
+# 📷 Screenshot
+
+Nella cartella **docs/** sono disponibili alcuni screenshot dell'applicazione.
+
+- Login
+- Dashboard
+- Lista Ticket
+- Database
+
+---
+
+# 🎓 Livello del progetto
+
+Il progetto implementa i requisiti del:
+
+✅ Livello 1
+
+✅ Livello 2
+
+Estensioni realizzate:
+
+- adattamento al settore nautico
+- Warranty Request
+- Spare Parts Request
+- gestione Dealer
+- gestione Imbarcazioni
+- dashboard statistiche
+- storico ticket
+- documenti
+- trasferte
+
+---
+
+# 👩‍💻 Autore
 
 **Morena Tirana**
-Progetto universitario sviluppato per il corso di Tecnologie Web.
+
+Corso di Tecnologie Informatiche per il Web

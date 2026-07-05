@@ -1,3 +1,5 @@
+//server/controllers/userController.js
+
 const db = require('../db');
 
 exports.getUsers = (req, res) => {
