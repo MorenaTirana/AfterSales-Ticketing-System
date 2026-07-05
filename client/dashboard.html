@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Sessa After Sales</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- =======================
+         SIDEBAR
+    ======================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>SESSA</h2>
+
+            <span>After Sales System</span>
+
+        </div>
+
+        <ul>
+
+            <li class="active">
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="tickets.html">
+                    <i class="fa-solid fa-ticket"></i>
+                    Ticket
+                </a>
+            </li>
+
+            <li>
+                <a href="barche.html">
+                    <i class="fa-solid fa-ship"></i>
+                    Barche
+                </a>
+            </li>
+
+            <li>
+                <a href="clienti.html">
+                    <i class="fa-solid fa-users"></i>
+                    Clienti
+                </a>
+            </li>
+
+            <li>
+                <a href="dealer.html">
+                    <i class="fa-solid fa-building"></i>
+                    Dealer
+                </a>
+            </li>
+
+            <li>
+                <a href="wir.html">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                    WIR
+                </a>
+            </li>
+
+            <li>
+                <a href="spr.html">
+                    <i class="fa-solid fa-box"></i>
+                    SPR
+                </a>
+            </li>
+
+            <li>
+                <a href="documenti.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Documenti
+                </a>
+            </li>
+
+            <li>
+                <a href="trasferte.html">
+                    <i class="fa-solid fa-truck"></i>
+                    Trasferte
+                </a>
+            </li>
+
+            <li>
+                <a href="statistiche.html">
+                    <i class="fa-solid fa-chart-column"></i>
+                    Statistiche
+                </a>
+            </li>
+
+            <li>
+                <a href="impostazioni.html">
+                    <i class="fa-solid fa-gear"></i>
+                    Impostazioni
+                </a>
+            </li>
+
+        </ul>
+
+        <button id="logoutBtn" class="logout">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </button>
+
+    </aside>
+
+    <!-- =======================
+         CONTENT
+    ======================== -->
+
+    <main class="content">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>Dashboard</h1>
+
+                <p id="welcome"></p>
+
+                <span id="role"></span>
+
+            </div>
+
+        </div>
+
+        <!-- =======================
+             CARDS
+        ======================== -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <i class="fa-solid fa-ticket card-icon blue"></i>
+
+                <h2 id="ticketOpen">0</h2>
+
+                <p>Ticket aperti</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-circle-check card-icon green"></i>
+
+                <h2 id="ticketClosed">0</h2>
+
+                <p>Ticket chiusi</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-building card-icon orange"></i>
+
+                <h2 id="dealerCount">0</h2>
+
+                <p>Dealer</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-users card-icon purple"></i>
+
+                <h2 id="customerCount">0</h2>
+
+                <p>Clienti</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-ship card-icon cyan"></i>
+
+                <h2 id="boatCount">0</h2>
+
+                <p>Barche</p>
+
+            </div>
+
+        </div>
+
+        <!-- =======================
+             TABELLA
+        ======================== -->
+
+        <div class="table-box">
+
+            <div class="table-title">
+
+                Ultimi Ticket
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                <tr>
+
+                    <th>Codice</th>
+                    <th>Cliente</th>
+                    <th>Problema</th>
+                    <th>Stato</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody id="lastTickets">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
