@@ -27,11 +27,11 @@ Richiesta di intervento in garanzia.
 
 Informazioni gestite:
 
-- parte danneggiata
-- tipologia del danno
-- causa
-- responsabilità
-- soluzione proposta
+- Parte danneggiata
+- Tipologia del danno
+- Causa
+- Responsabilità
+- Soluzione proposta
 
 ---
 
@@ -41,11 +41,11 @@ Richiesta di ricambi.
 
 Informazioni gestite:
 
-- codice articolo
-- descrizione
-- quantità
-- costo
-- tempi di consegna
+- Codice articolo
+- Descrizione
+- Quantità
+- Costo
+- Tempi di consegna
 
 ---
 
@@ -55,7 +55,7 @@ Informazioni gestite:
 |--------|---------------------|
 | Cliente / Dealer | Apertura e consultazione ticket |
 | After Sales | Gestione ticket e aggiornamento stati |
-| Tecnico | Consultazione ticket assegnati e note tecniche |
+| Tecnico | Consultazione ticket assegnati e inserimento note |
 | Amministratore | Gestione completa del sistema |
 
 ---
@@ -77,8 +77,8 @@ Informazioni gestite:
 
 ## Dashboard
 
-- Visualizzazione dati riepilogativi
 - Stato generale dei ticket
+- Visualizzazione riepilogativa
 - Statistiche principali
 
 ---
@@ -97,12 +97,12 @@ Informazioni gestite:
 # Struttura del Progetto
 
 ```text
-SESSA-MARINE-SYSTEM
+AfterSales-Ticketing-System
 │
 ├── client/
 │   ├── css/
 │   ├── js/
-│   ├── *.html
+│   └── *.html
 │
 ├── server/
 │   ├── controllers/
@@ -117,8 +117,8 @@ SESSA-MARINE-SYSTEM
 │
 ├── package.json
 ├── package-lock.json
-├── README.md
-└── .gitignore
+├── .gitignore
+└── README.md
 ```
 
 ---
@@ -127,10 +127,10 @@ SESSA-MARINE-SYSTEM
 
 ## Prerequisiti
 
-- Node.js 18 o superiore
-- MySQL 8 o superiore
+- Node.js 18+
+- MySQL 8+
 
-## Installazione dipendenze
+## Installazione
 
 ```bash
 npm install
@@ -169,7 +169,7 @@ oppure
 node server/app.js
 ```
 
-Il server sarà disponibile all'indirizzo:
+Il server sarà disponibile su:
 
 ```text
 http://localhost:3001
@@ -179,16 +179,28 @@ http://localhost:3001
 
 # Database
 
-Il database contiene le principali entità del sistema:
+Il database comprende le principali entità del sistema:
 
 - Users
-- Customers
+- Dealers
+- Boats
 - Tickets
-- Warranty Requests
-- Spare Parts Requests
+- Warranty Details
+- Spare Parts Details
+- Assignments
+- Ticket Comments
+- Attachments
+- Status History
+- Documents
+- Transfers
 
 Lo schema completo è disponibile nel file:
 
 ```text
 database/schema.sql
 ```
+---
+# Autore
+
+**Morena Tirana**
+Progetto universitario sviluppato per il corso di Tecnologie Web.
