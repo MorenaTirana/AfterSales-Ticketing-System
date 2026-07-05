@@ -1,3 +1,4 @@
+//server/routes/ticketRoutes.js
 const express=require("express");
 
 const router=express.Router();

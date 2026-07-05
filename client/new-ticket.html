@@ -1,0 +1,163 @@
+<!-- client/new-ticket.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuovo Ticket - Sessa After Sales</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+</head>
+<body>
+    <header class="header">
+        <div class="header-brand">
+            <h1>🚤 Sessa After Sales</h1>
+        </div>
+        <nav class="header-nav">
+            <a href="tickets.html"><i class="fas fa-ticket-alt"></i> Ticket</a>
+            <a href="new-ticket.html" class="active"><i class="fas fa-plus"></i> Nuovo Ticket</a>
+            <span id="dashboardLink"></span>
+            <a href="#" onclick="logout()" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Esci</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-plus-circle"></i> Crea Nuovo Ticket</h2>
+            </div>
+            
+            <form id="ticketForm" class="form">
+                <!-- Tipo Ticket -->
+                <div class="form-section">
+                    <h3>Tipo di Richiesta</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tipo">Seleziona il tipo di ticket *</label>
+                            <div class="ticket-type-selector">
+                                <label class="type-option">
+                                    <input type="radio" name="tipo" value="warranty" required>
+                                    <div class="type-card">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span class="type-title">Garanzia (WIR)</span>
+                                        <span class="type-desc">Richiesta intervento in garanzia</span>
+                                    </div>
+                                </label>
+                                <label class="type-option">
+                                    <input type="radio" name="tipo" value="spare_parts" required>
+                                    <div class="type-card">
+                                        <i class="fas fa-cogs"></i>
+                                        <span class="type-title">Ricambi (SPR)</span>
+                                        <span class="type-desc">Richiesta spare parts</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informazioni Base -->
+                <div class="form-section">
+                    <h3>Informazioni Base</h3>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="titolo">Titolo *</label>
+                            <input type="text" id="titolo" name="titolo" required 
+                                   placeholder="Breve descrizione del problema" maxlength="200">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="descrizione">Descrizione Dettagliata *</label>
+                            <textarea id="descrizione" name="descrizione" required 
+                                      placeholder="Descrivi in dettaglio il problema o la richiesta..." 
+                                      rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="priorita">Priorità</label>
+                            <select id="priorita" name="priorita">
+                                <option value="media">🟡 Media</option>
+                                <option value="bassa">🟢 Bassa</option>
+                                <option value="alta">🟠 Alta</option>
+                                <option value="critica">🔴 Critica</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="boat_id">Barca Associata</label>
+                            <select id="boat_id" name="boat_id">
+                                <option value="">Seleziona barca...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campi Garanzia -->
+                <div class="form-section" id="warrantyFields" style="display:none">
+                    <h3><i class="fas fa-shield-alt"></i> Dettagli Garanzia</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="damaged_part">Parte Danneggiata</label>
+                            <input type="text" id="damaged_part" name="damaged_part" 
+                                   placeholder="Es: Finestra scorrevole, Pompa, Gelcoat...">
+                        </div>
+                        <div class="form-group">
+                            <label for="damage_type">Tipo di Danno</label>
+                            <input type="text" id="damage_type" name="damage_type" 
+                                   placeholder="Es: Rottura, Malfunzionamento, Infiltrazione...">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="causa">Possibile Causa</label>
+                            <textarea id="causa" name="causa" rows="3"
+                                      placeholder="Descrivi la possibile causa del problema..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campi Ricambi -->
+                <div class="form-section" id="sparePartsFields" style="display:none">
+                    <h3><i class="fas fa-cogs"></i> Dettagli Ricambi</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="article_code">Codice Articolo</label>
+                            <input type="text" id="article_code" name="article_code" 
+                                   placeholder="Se conosciuto">
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Quantità</label>
+                            <input type="number" id="quantity" name="quantity" 
+                                   value="1" min="1" max="999">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="article_description">Descrizione Articolo</label>
+                            <textarea id="article_description" name="article_description" rows="3"
+                                      placeholder="Descrivi il ricambio richiesto..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pulsanti -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='tickets.html'">
+                        <i class="fas fa-times"></i> Annulla
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Crea Ticket
+                    </button>
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message"></div>
+            </form>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/new-ticket.js"></script>
+</body>
+</html>

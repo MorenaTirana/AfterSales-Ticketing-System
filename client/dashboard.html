@@ -1,248 +1,154 @@
+<!-- client/dashboard.html -->
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Sessa After Sales</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sessa After Sales</title>
     <link rel="stylesheet" href="css/style.css">
-
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+    <link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+    <script src="[cdn.jsdelivr.net](https://cdn.jsdelivr.net/npm/chart.js)"></script>
 </head>
-
 <body>
+    <header class="header">
+        <div class="header-brand">
+            <h1>🚤 Sessa After Sales</h1>
+        </div>
+        <nav class="header-nav">
+            <a href="tickets.html"><i class="fas fa-ticket-alt"></i> Ticket</a>
+            <a href="new-ticket.html"><i class="fas fa-plus"></i> Nuovo Ticket</a>
+            <a href="dashboard.html" class="active"><i class="fas fa-chart-bar"></i> Dashboard</a>
+            <a href="#" onclick="logout()" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Esci</a>
+        </nav>
+    </header>
 
-<div class="dashboard">
+    <main class="container">
+        <h2 class="page-title"><i class="fas fa-chart-line"></i> Dashboard Statistiche</h2>
 
-    <!-- =======================
-         SIDEBAR
-    ======================== -->
-
-    <aside class="sidebar">
-
-        <div class="logo">
-
-            <h2>SESSA</h2>
-
-            <span>After Sales System</span>
-
+        <!-- KPI Cards -->
+        <div class="dashboard-kpi-grid">
+            <div class="kpi-card kpi-primary">
+                <div class="kpi-icon"><i class="fas fa-folder-open"></i></div>
+                <div class="kpi-content">
+                    <span class="kpi-value" id="kpiAperti">-</span>
+                    <span class="kpi-label">Ticket Aperti</span>
+                </div>
+            </div>
+            <div class="kpi-card kpi-success">
+                <div class="kpi-icon"><i class="fas fa-check-double"></i></div>
+                <div class="kpi-content">
+                    <span class="kpi-value" id="kpiChiusi">-</span>
+                    <span class="kpi-label">Ticket Chiusi</span>
+                </div>
+            </div>
+            <div class="kpi-card kpi-warning">
+                <div class="kpi-icon"><i class="fas fa-clock"></i></div>
+                <div class="kpi-content">
+                    <span class="kpi-value" id="kpiTempoMedio">-</span>
+                    <span class="kpi-label">Tempo Medio (giorni)</span>
+                </div>
+            </div>
+            <div class="kpi-card kpi-danger">
+                <div class="kpi-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="kpi-content">
+                    <span class="kpi-value" id="kpiUrgenti">-</span>
+                    <span class="kpi-label">Urgenti Non Assegnati</span>
+                </div>
+            </div>
         </div>
 
-        <ul>
-
-            <li class="active">
-                <a href="dashboard.html">
-                    <i class="fa-solid fa-house"></i>
-                    Dashboard
-                </a>
-            </li>
-
-            <li>
-                <a href="tickets.html">
-                    <i class="fa-solid fa-ticket"></i>
-                    Ticket
-                </a>
-            </li>
-
-            <li>
-                <a href="barche.html">
-                    <i class="fa-solid fa-ship"></i>
-                    Barche
-                </a>
-            </li>
-
-            <li>
-                <a href="clienti.html">
-                    <i class="fa-solid fa-users"></i>
-                    Clienti
-                </a>
-            </li>
-
-            <li>
-                <a href="dealer.html">
-                    <i class="fa-solid fa-building"></i>
-                    Dealer
-                </a>
-            </li>
-
-            <li>
-                <a href="wir.html">
-                    <i class="fa-solid fa-clipboard-check"></i>
-                    WIR
-                </a>
-            </li>
-
-            <li>
-                <a href="spr.html">
-                    <i class="fa-solid fa-box"></i>
-                    SPR
-                </a>
-            </li>
-
-            <li>
-                <a href="documenti.html">
-                    <i class="fa-solid fa-file-lines"></i>
-                    Documenti
-                </a>
-            </li>
-
-            <li>
-                <a href="trasferte.html">
-                    <i class="fa-solid fa-truck"></i>
-                    Trasferte
-                </a>
-            </li>
-
-            <li>
-                <a href="statistiche.html">
-                    <i class="fa-solid fa-chart-column"></i>
-                    Statistiche
-                </a>
-            </li>
-
-            <li>
-                <a href="impostazioni.html">
-                    <i class="fa-solid fa-gear"></i>
-                    Impostazioni
-                </a>
-            </li>
-
-        </ul>
-
-        <button id="logoutBtn" class="logout">
-
-            <i class="fa-solid fa-right-from-bracket"></i>
-
-            Logout
-
-        </button>
-
-    </aside>
-
-    <!-- =======================
-         CONTENT
-    ======================== -->
-
-    <main class="content">
-
-        <div class="page-header">
-
-            <div>
-
-                <h1>Dashboard</h1>
-
-                <p id="welcome"></p>
-
-                <span id="role"></span>
-
+        <!-- Grafici Row 1 -->
+        <div class="dashboard-grid">
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-pie"></i> Ticket per Stato</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartStato"></canvas>
+                </div>
             </div>
-
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-bar"></i> Ticket per Priorità</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartPriorita"></canvas>
+                </div>
+            </div>
         </div>
 
-        <!-- =======================
-             CARDS
-        ======================== -->
-
-        <div class="cards">
-
-            <div class="card">
-
-                <i class="fa-solid fa-ticket card-icon blue"></i>
-
-                <h2 id="ticketOpen">0</h2>
-
-                <p>Ticket aperti</p>
-
+        <!-- Grafici Row 2 -->
+        <div class="dashboard-grid">
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-users"></i> Ticket per Tecnico</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartTecnici"></canvas>
+                </div>
             </div>
-
-            <div class="card">
-
-                <i class="fa-solid fa-circle-check card-icon green"></i>
-
-                <h2 id="ticketClosed">0</h2>
-
-                <p>Ticket chiusi</p>
-
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-tools"></i> Parti Più Danneggiate</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartDamaged"></canvas>
+                </div>
             </div>
-
-            <div class="card">
-
-                <i class="fa-solid fa-building card-icon orange"></i>
-
-                <h2 id="dealerCount">0</h2>
-
-                <p>Dealer</p>
-
-            </div>
-
-            <div class="card">
-
-                <i class="fa-solid fa-users card-icon purple"></i>
-
-                <h2 id="customerCount">0</h2>
-
-                <p>Clienti</p>
-
-            </div>
-
-            <div class="card">
-
-                <i class="fa-solid fa-ship card-icon cyan"></i>
-
-                <h2 id="boatCount">0</h2>
-
-                <p>Barche</p>
-
-            </div>
-
         </div>
 
-        <!-- =======================
-             TABELLA
-        ======================== -->
-
-        <div class="table-box">
-
-            <div class="table-title">
-
-                Ultimi Ticket
-
+        <!-- Grafici Row 3 -->
+        <div class="dashboard-grid">
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-hand-holding"></i> Responsabilità Garanzie</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartResponsabilities"></canvas>
+                </div>
             </div>
-
-            <table>
-
-                <thead>
-
-                <tr>
-
-                    <th>Codice</th>
-                    <th>Cliente</th>
-                    <th>Problema</th>
-                    <th>Stato</th>
-
-                </tr>
-
-                </thead>
-
-                <tbody id="lastTickets">
-
-                </tbody>
-
-            </table>
-
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-building"></i> Top 10 Dealer</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartDealer"></canvas>
+                </div>
+            </div>
         </div>
 
+        <!-- Grafico Andamento Mensile -->
+        <div class="card chart-card-full">
+            <div class="card-header">
+                <h3><i class="fas fa-chart-line"></i> Andamento Mensile</h3>
+            </div>
+            <div class="chart-container-wide">
+                <canvas id="chartMensile"></canvas>
+            </div>
+        </div>
+
+        <!-- Attività Recente -->
+        <div class="dashboard-grid">
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-clock"></i> Ticket Recenti</h3>
+                </div>
+                <div id="recentTickets" class="recent-list">
+                    <!-- Caricato dinamicamente -->
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-history"></i> Attività Recente</h3>
+                </div>
+                <div id="recentActivity" class="recent-list">
+                    <!-- Caricato dinamicamente -->
+                </div>
+            </div>
+        </div>
     </main>
 
-</div>
-
-<script src="js/dashboard.js"></script>
-
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
 </body>
-
 </html>

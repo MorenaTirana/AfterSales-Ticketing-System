@@ -1,0 +1,144 @@
+<!-- client/ticket-detail.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettaglio Ticket - Sessa After Sales</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+</head>
+<body>
+    <header class="header">
+        <div class="header-brand">
+            <h1>🚤 Sessa After Sales</h1>
+        </div>
+        <nav class="header-nav">
+            <a href="tickets.html"><i class="fas fa-arrow-left"></i> Torna ai Ticket</a>
+            <span id="dashboardLink"></span>
+            <a href="#" onclick="logout()" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Esci</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Header Ticket -->
+        <div class="card ticket-header-card" id="ticketHeader">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin fa-2x"></i>
+                <p>Caricamento ticket...</p>
+            </div>
+        </div>
+
+        <div class="ticket-detail-grid">
+            <!-- Colonna Principale -->
+            <div class="ticket-main-column">
+                <!-- Informazioni Ticket -->
+                <div class="card" id="ticketInfo">
+                    <!-- Contenuto caricato dinamicamente -->
+                </div>
+
+                <!-- Commenti -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-comments"></i> Commenti</h3>
+                        <span class="comment-count" id="commentCount">0</span>
+                    </div>
+                    <div id="commentsList" class="comments-list">
+                        <!-- Commenti caricati dinamicamente -->
+                    </div>
+                    
+                    <!-- Form nuovo commento -->
+                    <form id="commentForm" class="comment-form">
+                        <div class="form-group">
+                            <textarea id="commentText" placeholder="Scrivi un commento..." 
+                                      rows="3" required></textarea>
+                        </div>
+                        <div class="comment-form-actions">
+                            <div class="visibility-toggle" id="visibilityToggle" style="display:none">
+                                <label class="toggle-label">
+                                    <input type="checkbox" id="commentInterno">
+                                    <span class="toggle-text">
+                                        <i class="fas fa-lock"></i> Commento interno
+                                    </span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Invia
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="ticket-sidebar">
+                <!-- Allegati -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-paperclip"></i> Allegati</h3>
+                    </div>
+                    <div id="attachmentsList" class="attachments-list">
+                        <!-- Allegati caricati dinamicamente -->
+                    </div>
+                    <form id="uploadForm" class="upload-form">
+                        <input type="file" id="fileInput" style="display:none">
+                        <button type="button" class="btn btn-secondary btn-block" onclick="document.getElementById('fileInput').click()">
+                            <i class="fas fa-upload"></i> Carica File
+                        </button>
+                        <small class="upload-hint">Max 10MB - Immagini, PDF, Documenti</small>
+                    </form>
+                </div>
+
+                <!-- Azioni Staff -->
+                <div class="card" id="staffActions" style="display:none">
+                    <div class="card-header">
+                        <h3><i class="fas fa-tools"></i> Azioni</h3>
+                    </div>
+                    
+                    <!-- Cambio Stato -->
+                    <div class="action-section">
+                        <label>Cambia Stato</label>
+                        <select id="newStatus" class="form-control">
+                            <option value="">Seleziona stato...</option>
+                            <option value="aperto">Aperto</option>
+                            <option value="in_analisi">In Analisi</option>
+                            <option value="in_attesa_ricambi">Attesa Ricambi</option>
+                            <option value="in_attesa_cliente">Attesa Cliente</option>
+                            <option value="intervento_programmato">Intervento Programmato</option>
+                            <option value="risolto">Risolto</option>
+                            <option value="chiuso">Chiuso</option>
+                        </select>
+                        <button class="btn btn-primary btn-block" onclick="updateStatus()">
+                            <i class="fas fa-sync"></i> Aggiorna Stato
+                        </button>
+                    </div>
+
+                    <!-- Assegnazione Tecnico -->
+                    <div class="action-section" id="assignSection">
+                        <label>Assegna Tecnico</label>
+                        <select id="technicianSelect" class="form-control">
+                            <option value="">Seleziona tecnico...</option>
+                        </select>
+                        <button class="btn btn-secondary btn-block" onclick="assignTechnician()">
+                            <i class="fas fa-user-plus"></i> Assegna
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Storico -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-history"></i> Storico</h3>
+                    </div>
+                    <div id="historyList" class="history-list">
+                        <!-- Storico caricato dinamicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/ticket-detail.js"></script>
+</body>
+</html>

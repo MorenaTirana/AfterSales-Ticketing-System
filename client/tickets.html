@@ -1,75 +1,143 @@
+<!-- client/tickets.html -->
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Ticket Management</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <title>Ticket - Sessa After Sales</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
 </head>
+<body>
+    <header class="header">
+        <div class="header-brand">
+            <h1>🚤 Sessa After Sales</h1>
+        </div>
+        <nav class="header-nav" id="mainNav">
+            <a href="tickets.html" class="active"><i class="fas fa-ticket-alt"></i> Ticket</a>
+            <a href="new-ticket.html"><i class="fas fa-plus"></i> Nuovo Ticket</a>
+            <span id="dashboardLink"></span>
+            <span id="userInfo"></span>
+            <a href="#" onclick="logout()" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Esci</a>
+        </nav>
+    </header>
 
-<body class="bg-light">
-
-<div class="container mt-4">
-
-    <div class="d-flex justify-content-between align-items-center mb-4">
-
-        <h2>🎫 Ticket Management</h2>
-
-        <button class="btn btn-primary">
-            + Nuovo Ticket
-        </button>
-
-    </div>
-
-    <div class="row mb-3">
-
-        <div class="col-md-4">
-
-            <input
-                id="search"
-                class="form-control"
-                placeholder="Cerca ticket...">
-
+    <main class="container">
+        <!-- Stats Cards -->
+        <div class="stats-row" id="statsRow">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-folder-open"></i></div>
+                <div class="stat-content">
+                    <span class="stat-number" id="statAperti">-</span>
+                    <span class="stat-label">Aperti</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-spinner"></i></div>
+                <div class="stat-content">
+                    <span class="stat-number" id="statInLavorazione">-</span>
+                    <span class="stat-label">In Lavorazione</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-content">
+                    <span class="stat-number" id="statRisolti">-</span>
+                    <span class="stat-label">Risolti</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-archive"></i></div>
+                <div class="stat-content">
+                    <span class="stat-number" id="statChiusi">-</span>
+                    <span class="stat-label">Chiusi</span>
+                </div>
+            </div>
         </div>
 
-    </div>
+        <!-- Filtri -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-filter"></i> Filtri</h2>
+                <button class="btn btn-secondary btn-sm" onclick="resetFilters()">
+                    <i class="fas fa-undo"></i> Reset
+                </button>
+            </div>
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="filterStato">Stato</label>
+                    <select id="filterStato">
+                        <option value="">Tutti gli stati</option>
+                        <option value="aperto">Aperto</option>
+                        <option value="in_analisi">In Analisi</option>
+                        <option value="in_attesa_ricambi">Attesa Ricambi</option>
+                        <option value="in_attesa_cliente">Attesa Cliente</option>
+                        <option value="intervento_programmato">Intervento Programmato</option>
+                        <option value="risolto">Risolto</option>
+                        <option value="chiuso">Chiuso</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filterTipo">Tipo</label>
+                    <select id="filterTipo">
+                        <option value="">Tutti i tipi</option>
+                        <option value="warranty">Garanzia (WIR)</option>
+                        <option value="spare_parts">Ricambi (SPR)</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filterPriorita">Priorità</label>
+                    <select id="filterPriorita">
+                        <option value="">Tutte le priorità</option>
+                        <option value="critica">🔴 Critica</option>
+                        <option value="alta">🟠 Alta</option>
+                        <option value="media">🟡 Media</option>
+                        <option value="bassa">🟢 Bassa</option>
+                    </select>
+                </div>
+                <div class="filter-group" id="filterTecnicoGroup" style="display:none">
+                    <label for="filterTecnico">Tecnico</label>
+                    <select id="filterTecnico">
+                        <option value="">Tutti i tecnici</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-    <table class="table table-bordered table-hover align-middle">
+        <!-- Lista Ticket -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-list"></i> I Miei Ticket</h2>
+                <span class="ticket-count" id="ticketCount">0 ticket</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table" id="ticketTable">
+                    <thead>
+                        <tr>
+                            <th>Codice</th>
+                            <th>Titolo</th>
+                            <th>Tipo</th>
+                            <th>Stato</th>
+                            <th>Priorità</th>
+                            <th>Cliente</th>
+                            <th>Tecnico</th>
+                            <th>Data</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ticketList">
+                        <tr>
+                            <td colspan="9" class="text-center">
+                                <i class="fas fa-spinner fa-spin"></i> Caricamento...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 
-        <thead class="table-dark">
-
-        <tr>
-
-            <th>ID</th>
-            <th>Codice</th>
-            <th>Titolo</th>
-            <th>Cliente</th>
-            <th>Barca</th>
-            <th>Tipo</th>
-            <th>Priorità</th>
-            <th>Stato</th>
-            <th>Data</th>
-            <th>Azioni</th>
-
-        </tr>
-
-        </thead>
-
-        <tbody id="ticketTable">
-
-        </tbody>
-
-    </table>
-
-</div>
-
-<script src="js/tickets.js"></script>
-
+    <script src="js/auth.js"></script>
+    <script src="js/tickets.js"></script>
 </body>
-
 </html>
