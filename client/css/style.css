@@ -617,7 +617,26 @@ border-radius:20px;
 /* ==========================================================
    FOOTER
 ========================================================== */
+html,
+body{
 
+    min-height:100%;
+    margin:0;
+
+}
+
+body{
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+main{
+
+    flex:1;
+
+}
 .footer{
 
     margin-top:50px;
@@ -781,26 +800,66 @@ border-radius:20px;
 
 .landing-page{
 
-    background:#eef3f8;
+    background:url("../images/hero.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+    min-height:100vh;
 
 }
 
 .landing-header{
 
     background:#123b6d;
+
     color:white;
 
     display:flex;
-    align-items:center;
-    gap:20px;
 
-    padding:20px 50px;
+    align-items:center;
+
+    gap:25px;
+
+    padding:0 45px;
+
+    height:130px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.25);
+
+}
+
+.landing-header h1{
+
+    margin:0;
+
+    font-size:3rem;
+
+    font-weight:700;
+
+}
+
+.landing-header p{
+
+    margin-top:8px;
+
+    font-size:1.35rem;
+
+    color:#ffffff;
 
 }
 
 .landing-logo{
 
-    width:90px;
+    height:120px;
+
+    width:auto;
+
+    border-radius:30%;
+
+    object-fit:contain;
 
 }
 
@@ -817,23 +876,21 @@ border-radius:20px;
     justify-content:center;
     align-items:center;
 
-    padding:60px;
+    min-height:55vh;
 
 }
 
 .landing-card{
 
-    background:white;
+    background:rgba(255,255,255,.93);
 
-    width:650px;
+    backdrop-filter:blur(5px);
 
-    border-radius:18px;
+    border-radius:20px;
 
     padding:45px;
 
-    text-align:center;
-
-    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
 
 }
 
@@ -896,9 +953,8 @@ border-radius:20px;
 }
 .header-logo{
 
-    width:70px;
+    width:110px;
     height:auto;
-    margin-right:15px;
 
 }
 
@@ -908,19 +964,7 @@ border-radius:20px;
     align-items:center;
 
 }
-.landing-page{
 
-    background:
-
-        linear-gradient(rgba(255,255,255,.88),rgba(255,255,255,.88)),
-
-        url("../images/hero.jpg");
-
-    background-size:cover;
-
-    background-position:center;
-
-}
 .feature-card{
 
     transition:.3s;
