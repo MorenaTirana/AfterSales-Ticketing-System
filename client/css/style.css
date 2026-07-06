@@ -775,3 +775,172 @@ border-radius:20px;
     overflow-y:auto;
 
 }
+/* ===========================
+   LANDING PAGE
+=========================== */
+
+.landing-page{
+
+    background:#eef3f8;
+
+}
+
+.landing-header{
+
+    background:#123b6d;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    padding:20px 50px;
+
+}
+
+.landing-logo{
+
+    width:90px;
+
+}
+
+.landing-logo-big{
+
+    width:180px;
+    margin-bottom:20px;
+
+}
+
+.landing-hero{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:60px;
+
+}
+
+.landing-card{
+
+    background:white;
+
+    width:650px;
+
+    border-radius:18px;
+
+    padding:45px;
+
+    text-align:center;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+
+}
+
+.landing-buttons{
+
+    margin-top:35px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.landing-features{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:20px;
+
+    padding:40px 60px;
+
+}
+
+.feature-card{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.10);
+
+    transition:.25s;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.feature-card i{
+
+    font-size:42px;
+
+    color:#123b6d;
+
+    margin-bottom:15px;
+
+}
+.header-logo{
+
+    width:70px;
+    height:auto;
+    margin-right:15px;
+
+}
+
+.header-brand{
+
+    display:flex;
+    align-items:center;
+
+}
+.landing-page{
+
+    background:
+
+        linear-gradient(rgba(255,255,255,.88),rgba(255,255,255,.88)),
+
+        url("../images/hero.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+}
+.feature-card{
+
+    transition:.3s;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.18);
+
+}.btn{
+
+    transition:.3s;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+}
