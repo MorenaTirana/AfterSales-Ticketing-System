@@ -13,6 +13,69 @@ body{
     background:#edf2f7;
     color:#222;
 }
+/* ==========================================
+   ABOUT
+========================================== */
+
+.about-card{
+
+    max-width:900px;
+
+    margin:60px auto;
+
+    text-align:left;
+
+}
+
+.about-card h2{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.about-card h3{
+
+    color:#123b6d;
+
+    margin-top:30px;
+
+}
+
+.about-card p{
+
+    line-height:1.7;
+
+}
+
+.about-card ul{
+
+    margin-left:25px;
+
+    line-height:1.8;
+
+}
+
+.about-card hr{
+
+    margin:30px 0;
+
+}
+
+.about-card pre{
+
+    text-align:center;
+
+    font-size:18px;
+
+    background:#f4f6f8;
+
+    padding:25px;
+
+    border-radius:10px;
+
+}
 
 /* ==========================================================
    LOGIN
@@ -29,12 +92,15 @@ body{
 
 .login-container{
 
-    width:420px;
-    background:#fff;
-    padding:40px;
-    border-radius:15px;
-    box-shadow:0 15px 35px rgba(0,0,0,.15);
-    text-align:center;
+    width:460px;
+
+    background:white;
+
+    padding:55px;
+
+    border-radius:20px;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.20);
 
 }
 
@@ -217,14 +283,17 @@ button:hover{
 
 .card{
 
-    width:190px;
-    height:110px;
+    width:100%;
+
+    max-width:250px;
+
+    min-height:140px;
 
     background:#fff;
 
-    border-radius:12px;
+    border-radius:14px;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.12);
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
 
     display:flex;
 
@@ -234,7 +303,7 @@ button:hover{
 
     align-items:center;
 
-    transition:.25s;
+    transition:.30s;
 
 }
 
@@ -356,11 +425,37 @@ tr:hover{
 
 .btn{
 
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:12px 24px;
+
     border:none;
-    border-radius:6px;
-    padding:8px 14px;
+
+    border-radius:8px;
+
     cursor:pointer;
-    transition:.2s;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:.30s;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+    opacity:.95;
 
 }
 
@@ -392,11 +487,7 @@ tr:hover{
 
 }
 
-.btn:hover{
 
-    opacity:.9;
-
-}
 
 /* ==========================================================
    RESPONSIVE
@@ -608,9 +699,11 @@ border-radius:20px;
 
 .container{
 
-    width:95%;
-    max-width:1400px;
-    margin:30px auto;
+    width:92%;
+
+    max-width:1450px;
+
+    margin:40px auto;
 
 }
 
@@ -639,20 +732,23 @@ main{
 }
 .footer{
 
-    margin-top:50px;
-    padding:20px;
-    background:#174d8c;
-    color:#fff;
+    margin-top:auto;
+
+    padding:25px;
+
+    background:#123b6d;
+
+    color:white;
+
     text-align:center;
-    font-size:14px;
-    border-top:4px solid #0d3766;
+
+    border-top:5px solid #1d7cc1;
 
 }
 
 .footer p{
 
-    margin:0;
-    letter-spacing:.5px;
+    margin:5px 0;
 
 }
 
@@ -932,13 +1028,15 @@ main{
 
     box-shadow:0 5px 15px rgba(0,0,0,.10);
 
-    transition:.25s;
+    transition:.30s;
 
 }
 
 .feature-card:hover{
 
-    transform:translateY(-5px);
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.18);
 
 }
 
@@ -965,26 +1063,3 @@ main{
 
 }
 
-.feature-card{
-
-    transition:.3s;
-
-}
-
-.feature-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:0 20px 40px rgba(0,0,0,.18);
-
-}.btn{
-
-    transition:.3s;
-
-}
-
-.btn:hover{
-
-    transform:translateY(-2px);
-
-}
