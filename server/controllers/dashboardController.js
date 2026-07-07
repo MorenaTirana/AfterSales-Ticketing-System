@@ -32,26 +32,42 @@ exports.getStats = (req,res)=>{
 
 };
 
-exports.getRecentActivity=(req,res)=>{
+exports.getRecentActivity = (req, res) => {
 
-    db.query(`
+    const sql = `
         SELECT
-        id,
-        codice,
-        titolo,
-        tipo,
-        stato
-        FROM tickets
-        ORDER BY id DESC
-        LIMIT 10
-    `,(err,rows)=>{
 
-        if(err) return res.status(500).json(err);
+            t.id,
+            t.codice,
+            t.titolo,
+            t.tipo,
+            t.stato,
+            t.created_at,
+
+            COALESCE(u.nome, 'Cliente') AS cliente_nome,
+COALESCE(u.cognome, '') AS cliente_cognome
+
+        FROM tickets t
+
+        LEFT JOIN users u
+            ON u.id = t.cliente_id
+
+        ORDER BY t.created_at DESC
+
+        LIMIT 10
+    `;
+
+    db.query(sql, (err, rows) => {
+
+        if (err) {
+            console.error(err);
+            return res.status(500).json(err);
+        }
 
         res.json({
 
-            recentTickets:rows,
-            statusChanges:[]
+            recentTickets: rows,
+            statusChanges: []
 
         });
 

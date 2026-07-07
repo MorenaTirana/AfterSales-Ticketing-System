@@ -1,60 +1,152 @@
 <!-- client/dashboard.html -->
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Sessa After Sales</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <header class="header">
+
         <div class="header-brand">
-            <h1>🚤 Sessa After Sales</h1>
+            <img src="images/logo.png" class="header-logo" alt="Sessa Marine">
+            <div>
+                <h1>SESSA MARINE</h1>
+                <p>After Sales Ticketing System</p>
+                <p class="header-user">
+                    <span id="userInfo"></span>
+                </p>
+            </div>
         </div>
+
         <nav class="header-nav">
-            <a href="tickets.html"><i class="fas fa-ticket-alt"></i> Ticket</a>
-            <a href="new-ticket.html"><i class="fas fa-plus"></i> Nuovo Ticket</a>
-            <a href="dashboard.html" class="active"><i class="fas fa-chart-bar"></i> Dashboard</a>
-            <a href="#" onclick="logout()" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Esci</a>
+            <a href="tickets.html">
+                <i class="fas fa-ticket-alt"></i> Ticket
+            </a>
+            <a href="new-ticket.html">
+                <i class="fas fa-plus"></i> Nuovo Ticket
+            </a>
+            <a href="dashboard.html" class="active">
+                <i class="fas fa-chart-line"></i> Dashboard
+            </a>
+            <a href="#" onclick="logout()">
+                <i class="fas fa-right-from-bracket"></i> Esci
+            </a>
         </nav>
+
     </header>
 
     <main class="container">
-        <h2 class="page-title"><i class="fas fa-chart-line"></i> Dashboard Statistiche</h2>
+
+        <div class="dashboard-title">
+            <div>
+                <h2>
+                    <i class="fas fa-chart-line"></i>
+                    Dashboard
+                </h2>
+                <p>
+                    Monitoraggio in tempo reale del reparto After Sales
+                </p>
+            </div>
+
+        </div>
+        <div class="welcome-banner">
+            <div class="welcome-text">
+                <h3>Benvenuto nel sistema After Sales</h3>
+                <p>
+                    Controlla rapidamente ticket, garanzie, ricambi e attività del reparto.
+                </p>
+                <div class="last-update">
+                    <i class="fas fa-calendar-days"></i>
+                    <strong>Ultimo aggiornamento</strong>
+                    <span id="todayDate"></span>
+                </div>
+            </div>
+            <i class="fas fa-ship welcome-icon"></i>
+            <div class="welcome-actions">
+                <a href="new-ticket.html" class="btn btn-success">
+                    <i class="fas fa-plus"></i>
+                    Nuovo Ticket
+                </a>
+            </div>
+        </div>
+        <div class="quick-actions">
+            <a href="new-ticket.html" class="btn btn-success">
+                <i class="fas fa-plus"></i>
+                Nuovo Ticket
+            </a>
+            <a href="customers.html" class="btn btn-primary">
+                <i class="fas fa-users"></i>
+                Clienti
+            </a>
+            <a href="barche.html" class="btn btn-secondary">
+                <i class="fas fa-ship"></i>
+                Barche
+            </a>
+            <a href="#" class="btn btn-warning">
+                <i class="fas fa-file-export"></i>
+                Report
+            </a>
+        </div>
 
         <!-- KPI Cards -->
         <div class="dashboard-kpi-grid">
             <div class="kpi-card kpi-primary">
-                <div class="kpi-icon"><i class="fas fa-folder-open"></i></div>
+                <div class="kpi-icon">
+                    <i class="fas fa-folder-open"></i>
+                </div>
                 <div class="kpi-content">
                     <span class="kpi-value" id="kpiAperti">-</span>
-                    <span class="kpi-label">Ticket Aperti</span>
+                    <span class="kpi-label">
+                        Ticket Aperti
+                    </span>
+                    <span class="kpi-small">
+                        Attualmente aperti
+                    </span>
                 </div>
             </div>
             <div class="kpi-card kpi-success">
                 <div class="kpi-icon"><i class="fas fa-check-double"></i></div>
                 <div class="kpi-content">
                     <span class="kpi-value" id="kpiChiusi">-</span>
-                    <span class="kpi-label">Ticket Chiusi</span>
+                    <span class="kpi-label">
+                        Ticket Chiusi
+                    </span>
+                    <span class="kpi-small">
+                        Ticket completati
+                    </span>
                 </div>
             </div>
             <div class="kpi-card kpi-warning">
                 <div class="kpi-icon"><i class="fas fa-clock"></i></div>
                 <div class="kpi-content">
                     <span class="kpi-value" id="kpiTempoMedio">-</span>
-                    <span class="kpi-label">Tempo Medio (giorni)</span>
+                    <span class="kpi-label">
+                        Tempo Medio (giorni)
+                    </span>
+                    <span class="kpi-small">
+                        Tempo di risoluzione
+                    </span>
                 </div>
             </div>
             <div class="kpi-card kpi-danger">
                 <div class="kpi-icon"><i class="fas fa-exclamation-triangle"></i></div>
                 <div class="kpi-content">
                     <span class="kpi-value" id="kpiUrgenti">-</span>
-                    <span class="kpi-label">Urgenti Non Assegnati</span>
+                    <span class="kpi-label">
+                        Urgenti Non Assegnati
+                    </span>
+                    <span class="kpi-small">
+                        Priorità critica
+                    </span>
                 </div>
             </div>
         </div>
@@ -63,7 +155,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         <div class="dashboard-grid">
             <div class="card chart-card">
                 <div class="card-header">
-                    <h3><i class="fas fa-chart-pie"></i> Ticket per Stato</h3>
+                    <h3>
+                        <i class="fas fa-chart-pie"></i>
+                        Ticket per Stato
+                    </h3>
+                    <small>
+                        Distribuzione dei ticket in base allo stato.
+                    </small>
                 </div>
                 <div class="chart-container">
                     <canvas id="chartStato"></canvas>
@@ -71,7 +169,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             </div>
             <div class="card chart-card">
                 <div class="card-header">
-                    <h3><i class="fas fa-chart-bar"></i> Ticket per Priorità</h3>
+                    <h3>
+                        <i class="fas fa-chart-bar"></i>
+                        Ticket per Priorità
+                    </h3>
+                    <small>
+                        Distribuzione dei ticket per priorità.
+                    </small>
                 </div>
                 <div class="chart-container">
                     <canvas id="chartPriorita"></canvas>
@@ -83,7 +187,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         <div class="dashboard-grid">
             <div class="card chart-card">
                 <div class="card-header">
-                    <h3><i class="fas fa-users"></i> Ticket per Tecnico</h3>
+                    <h3>
+                        <i class="fas fa-users"></i>
+                        Ticket per Tecnico
+                    </h3>
+                    <small>
+                        Carico di lavoro dei tecnici.
+                    </small>
                 </div>
                 <div class="chart-container">
                     <canvas id="chartTecnici"></canvas>
@@ -91,7 +201,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             </div>
             <div class="card chart-card">
                 <div class="card-header">
-                    <h3><i class="fas fa-tools"></i> Parti Più Danneggiate</h3>
+                    <h3>
+                        <i class="fas fa-tools"></i>
+                        Parti Più Danneggiate
+                    </h3>
+                    <small>
+                        Componenti maggiormente sostituiti.
+                    </small>
                 </div>
                 <div class="chart-container">
                     <canvas id="chartDamaged"></canvas>
@@ -103,7 +219,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         <div class="dashboard-grid">
             <div class="card chart-card">
                 <div class="card-header">
-                    <h3><i class="fas fa-hand-holding"></i> Responsabilità Garanzie</h3>
+                    <h3>
+                        <i class="fas fa-hand-holding"></i>
+                        Responsabilità Garanzie
+                    </h3>
+                    <small>
+                        Analisi delle cause degli interventi.
+                    </small>
                 </div>
                 <div class="chart-container">
                     <canvas id="chartResponsabilities"></canvas>
@@ -111,7 +233,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             </div>
             <div class="card chart-card">
                 <div class="card-header">
-                    <h3><i class="fas fa-building"></i> Top 10 Dealer</h3>
+                    <h3>
+                        <i class="fas fa-building"></i>
+                        Top 10 Dealer
+                    </h3>
+                    <small>
+                        Dealer con il maggior numero di ticket.
+                    </small>
                 </div>
                 <div class="chart-container">
                     <canvas id="chartDealer"></canvas>
@@ -122,7 +250,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         <!-- Grafico Andamento Mensile -->
         <div class="card chart-card-full">
             <div class="card-header">
-                <h3><i class="fas fa-chart-line"></i> Andamento Mensile</h3>
+                <h3>
+                    <i class="fas fa-chart-line"></i>
+                    Andamento Mensile
+                </h3>
+                <small>
+                    Evoluzione mensile delle richieste di assistenza.
+                </small>
             </div>
             <div class="chart-container-wide">
                 <canvas id="chartMensile"></canvas>
@@ -133,7 +267,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         <div class="dashboard-grid">
             <div class="card">
                 <div class="card-header">
-                    <h3><i class="fas fa-clock"></i> Ticket Recenti</h3>
+                    <h3>
+                        <i class="fas fa-fire"></i>
+                        Ultimi Ticket Creati
+                    </h3>
+                    <small>
+                        Ticket inseriti più recentemente.
+                    </small>
                 </div>
                 <div id="recentTickets" class="recent-list">
                     <!-- Caricato dinamicamente -->
@@ -141,7 +281,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h3><i class="fas fa-history"></i> Attività Recente</h3>
+                    <h3>
+                        <i class="fas fa-bolt"></i>
+                        Cronologia Attività
+                    </h3>
+                    <small>
+                        Cronologia delle ultime operazioni.
+                    </small>
                 </div>
                 <div id="recentActivity" class="recent-list">
                     <!-- Caricato dinamicamente -->
@@ -150,16 +296,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         </div>
     </main>
 
-      
-<footer class="footer">
-    <p>
-        🚤 <strong>SESSA MARINE - After Sales Ticketing System</strong><br>
-        Tecnologie Informatiche per il Web | Morena Tirana | A.A. 2025/2026
-    </p>
-</footer>
 
-<script src="js/auth.js"></script>
-<script src="js/dashboard.js"></script>
+    <footer class="footer">
+        <p>
+            🚤 <strong>SESSA MARINE - After Sales Ticketing System</strong>
+        </p>
+        
+        <p>
+            • A.A. 2025/2026
+        </p>
+        <p>Versione 1.0</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
 
 </body>
+
 </html>
